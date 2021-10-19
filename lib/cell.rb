@@ -15,13 +15,23 @@ class Cell
   end
   #adding some ideas for what these methods could be
   def fired_upon?
-    if @ship.health == length
-      true
-    else
+    if @ship.health == @ship.length #unsure about this method
       false
+    else
+      true
     end
   end
   def fire_upon
-    @ship.health -= 1
+   # if @ship != nil
+    #  puts "."
+   # else
+      @ship.hit
+  end
+  def render
+    if cell.fired_upon? == false
+      puts "."
+    elsif cell.fired_upon? == true || @ship == nil
+      puts "M"
+    elsif ...
   end
 end
