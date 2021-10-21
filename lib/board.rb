@@ -1,4 +1,5 @@
 require './lib/cell'
+require './lib/ship'
 
 class Board
 
@@ -23,5 +24,9 @@ class Board
 
   def valid_coordinate?(coordinate)
     @coords.include?(coordinate)
+  end
+
+  def valid_placement?(ship, coordinate)
+    ship.length == coordinate.count
   end
 end
