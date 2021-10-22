@@ -6,11 +6,9 @@ class Board
 
   def initialize
     @coordinates = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
-
   end
 
   def cells
-
     board_cells = {}
     @coordinates.each do |coordinate|
       board_cells[coordinate] = Cell.new(coordinate)
@@ -22,7 +20,6 @@ class Board
     @coordinates.include?(coordinate)
   end
 
-  #either all of the letters are the same OR all of the numbers are the same
   def consecutive_coordinates(coordinates)
     letters = []
     numbers = []
@@ -32,20 +29,33 @@ class Board
       numbers << split_coordinate.last
     end
    #go through letters array and see if all elements are equal
-   if letters[0] == letters[1] && letters[1] == letters[2]
+   if letters.all? { |letter| letter == letters[0] } #letters[0] == letters[1] && letters[1] == letters[2]
      true
-   elsif numbers[0] == numbers[1] && numbers[1] == numbers[2]
+   elsif numbers.all? { |number| number == numbers[0] }
      true
    else
      false
    end
-   #go through numbers array and see if all elements are equal
-
-   #if one of the above conditions is true, coordinates are consecutive
-   #else, coordinates are not consecutive
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.count && consecutive_coordinates
+    ship.length == coordinates.count && consecutive_coordinates == true && valid_coordinates(coordinates) == true
+  end
+
+  #is below method supposed to make a hash within a hash?
+  #make a new hash with ship as key, coordinates as values
+  #each coordinate would hopefully still have a cell instance and we could reach it
+  def place(ship, coordinates)
+    cells_covered = {}
+
+    if valid_placement?(ship, coordinates) == true
+
+      @coordinates.each do |coordinates|
+      cells_covered[ship] = coordinates
+      end
+
+      cells_covered.merge(@coordinates)
+    end
+
   end
 end
