@@ -31,12 +31,23 @@ RSpec.describe Board do
   it '#valid_placement? ship and coordinates length not equal' do
     submarine = Ship.new("Submarine", 2)
     cruiser = Ship.new("Cruiser", 3)
+
     expect(@board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
-    require 'pry';binding.pry
     expect(@board.valid_placement?(cruiser, ["A1", "A2"])).to be(false)
   end
 
-  it '#valid_placement ship and coordinates length equal' do
+  # it '#valid_placement ship and coordinates length equal' do
+  #
+  # end
 
+  it '#consecutive_coordinates ensures coordinates are consecutive' do
+    submarine = Ship.new("Submarine", 2)
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser_coordinates = ["A1", "A2", "A3"]
+    submarine_coordinates = ["C2", "A1"]
+
+
+    expect(@board.consecutive_coordinates(cruiser_coordinates)).to be(true)
+    expect(@board.consecutive_coordinates(submarine_coordinates)).to be(false)
   end
 end
