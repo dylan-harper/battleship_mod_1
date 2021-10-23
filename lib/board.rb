@@ -3,17 +3,21 @@ require './lib/ship'
 
 class Board
 
+  attr_accessor :board_cells
 
   def initialize
     @coordinates = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
+    @board_cells = {}
   end
 
   def cells
-    board_cells = {}
-    @coordinates.each do |coordinate|
-      board_cells[coordinate] = Cell.new(coordinate)
+    if @board_cells.keys.length < 16
+      @coordinates.each do |coordinate|
+        @board_cells[coordinate] = Cell.new(coordinate)
+      end
+    else
+      @board_cells
     end
-    board_cells
   end
 
   def valid_coordinate?(coordinate)
@@ -23,13 +27,13 @@ class Board
   def consecutive_coordinates(coordinates)
     letters = []
     numbers = []
-    coordinates.each do |coordinate| #deciding to iterate over the coordinates
-      split_coordinate = coordinate.split('') #splitting the coordinate letter/number in two
+    coordinates.each do |coordinate|
+      split_coordinate = coordinate.split('')
       letters << split_coordinate.first
       numbers << split_coordinate.last
     end
-   #go through letters array and see if all elements are equal
-   if letters.all? { |letter| letter == letters[0] } #letters[0] == letters[1] && letters[1] == letters[2]
+
+   if letters.all? { |letter| letter == letters[0] }
      true
    elsif numbers.all? { |number| number == numbers[0] }
      true
@@ -39,18 +43,14 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.count && consecutive_coordinates(coordinates) == true #&& valid_coordinates(coordinates) == true
+    ship.length == coordinates.count && consecutive_coordinates(coordinates) == true #&& @board_cells.
   end
 
-  #is below method supposed to make a hash within a hash?
-  #make a new hash with ship as key, coordinates as values
-  #each coordinate would hopefully still have a cell instance and we could reach it
+
   def place(ship, coordinates)
-
-    coordinates.each do |coordinate|
-      cells[coordinate].place_ship(ship)
-    end
-
+      coordinates.each do |coordinate|
+        @board_cells[coordinate].place_ship(ship)
+      end
 
   end
 end

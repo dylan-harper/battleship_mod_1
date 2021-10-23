@@ -13,7 +13,9 @@ RSpec.describe Board do
   end
 
   it 'board has cells' do
-
+    # require "pry"; binding.pry
+    @board.cells
+# require "pry"; binding.pry
     expect(@board.cells).to be_a(Hash)
     expect(@board.cells.keys.length).to eq(16)
   end
@@ -64,18 +66,35 @@ RSpec.describe Board do
     expect(@board.consecutive_coordinates(submarine_coordinates)).to be(false)
   end
 
-  it '#place places ship with associated cell' do
+  it '#place puts ship with associated cells' do
     cruiser = Ship.new("Cruiser", 3)
-    cell_1 = @board.cells["A1"] #cell_1 is equal to what?
+    cruiser_coordinates = ["A1", "A2", "A3"]
+    @board.cells
+    @board.consecutive_coordinates(["A1", "A2", "A3"])
+    @board.valid_placement?(cruiser, cruiser_coordinates)
+    @board.place(cruiser, ["A1", "A2", "A3"])
+    cell_1 = @board.cells["A1"]
     cell_2 = @board.cells["A2"]
     cell_3 = @board.cells["A3"]
-    cell_1.place_ship(cruiser)
-    cell_2.place_ship(cruiser)
-    cell_3.place_ship(cruiser)
-    @board.place(cruiser, ["A1", "A2", "A3"])
 
-    expect(cell_1.coordinate).to eq("A1")
-    expect(cell_2.coordinate).to eq("A2")
-    expect(cell_3.coordinate).to eq("A3")
+
+    expect(cell_1.ship).to eq(cruiser)
+    expect(cell_2.ship).to eq(cruiser)
+    expect(cell_3.ship).to eq(cruiser)
   end
+
+  # it '#place wont allow a cell to have two ships on it' do
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   submarine = Ship.new("Submarine", 2)
+  #   cell_1 = @board.cells["A1"]
+  #   cell_2 = @board.cells["A2"]
+  #   cell_3 = @board.cells["A3"]
+  #   cell_4 = @board.cells["B3"]
+  #   cell_5 = @board.cells["A3"]
+  #   require "pry"; binding.pry
+  #   @board.place(cruiser, ["A1", "A2", "A3"])
+  #   @board.place(submarine, ["B3", "A3"])
+  #
+  #   expect
+  # end
 end
