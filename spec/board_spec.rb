@@ -30,12 +30,23 @@ RSpec.describe Board do
 
   it '#valid_placement? evaluates ship and coordinates for length' do
     submarine = Ship.new("Submarine", 2)
-    # submarine1 = Ship.new("Submarine", 2) ??If this and the below test are included, test doesn't pass
     cruiser = Ship.new("Cruiser", 3)
+    submarine1 = Ship.new("Submarine", 2) #??If this and the below test are included, test doesn't pass
+    cruiser1 = Ship.new("Cruiser", 3)
+
+    #call consecutive_coordinates
+    #call valid_placement
+    # submarine_coordinates? = ["A2", "A3", "A4"]
+    # # consecutive_coordinates?_cruiser = ["B1", "B2"]
+    # consecutive_coordinates(consecutive_coordinates?_submarine)
+    # # consecutive_coordinates(consecutive_coordinates?_cruiser)
+
+
 
     expect(@board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
     expect(@board.valid_placement?(cruiser, ["B1", "B2"])).to be(false)
-    # expect(@board.valid_placement?(submarine1, ["C1", "C2"])).to be(true)
+    expect(@board.valid_placement?(submarine1, ["C1", "C2"])).to be(true)
+    expect(@board.valid_placement?(cruiser1, ["D1", "D2", "D3"])).to be(true)
   end
 
   # it '#valid_placement ship and coordinates length equal' do
@@ -53,5 +64,18 @@ RSpec.describe Board do
     expect(@board.consecutive_coordinates(submarine_coordinates)).to be(false)
   end
 
-  
+  it '#place places ship with associated cell' do
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = @board.cells["A1"] #cell_1 is equal to what?
+    cell_2 = @board.cells["A2"]
+    cell_3 = @board.cells["A3"]
+    cell_1.place_ship(cruiser)
+    cell_2.place_ship(cruiser)
+    cell_3.place_ship(cruiser)
+    @board.place(cruiser, ["A1", "A2", "A3"])
+
+    expect(cell_1.coordinate).to eq("A1")
+    expect(cell_2.coordinate).to eq("A2")
+    expect(cell_3.coordinate).to eq("A3")
+  end
 end

@@ -39,23 +39,18 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.count && consecutive_coordinates == true && valid_coordinates(coordinates) == true
+    ship.length == coordinates.count && consecutive_coordinates(coordinates) == true #&& valid_coordinates(coordinates) == true
   end
 
   #is below method supposed to make a hash within a hash?
   #make a new hash with ship as key, coordinates as values
   #each coordinate would hopefully still have a cell instance and we could reach it
   def place(ship, coordinates)
-    cells_covered = {}
 
-    if valid_placement?(ship, coordinates) == true
-
-      @coordinates.each do |coordinates|
-      cells_covered[ship] = coordinates
-      end
-
-      cells_covered.merge(@coordinates)
+    coordinates.each do |coordinate|
+      cells[coordinate].place_ship(ship)
     end
+
 
   end
 end
