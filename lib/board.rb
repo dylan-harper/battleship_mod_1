@@ -3,7 +3,7 @@ require './lib/ship'
 
 class Board
 
-  attr_accessor :board_cells
+  attr_reader :board_cells
 
   def initialize
     @coordinates = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
@@ -29,21 +29,37 @@ class Board
     numbers = []
     coordinates.each do |coordinate|
       split_coordinate = coordinate.split('')
+      # require "pry"; binding.pry
       letters << split_coordinate.first
       numbers << split_coordinate.last
     end
 
    if letters.all? { |letter| letter == letters[0] }
      true
-   elsif numbers.all? { |number| number == numbers[0] }
+  elsif numbers.all? { |number| number == numbers[0] }
      true
    else
      false
    end
   end
 
+  def overlapping_ships?(coordinates)
+    coordinates.each do |coordinate|
+      if @board_cells[coordinate].ship != nil
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.count && consecutive_coordinates(coordinates) == true #&& @board_cells.
+    if ship.length == coordinates.count && consecutive_coordinates(coordinates) == true && overlapping_ships?(coordinates) == false
+      true
+    else
+      false
+    end
   end
 
 
@@ -53,4 +69,6 @@ class Board
       end
 
   end
+
+
 end
