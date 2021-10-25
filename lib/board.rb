@@ -34,7 +34,7 @@ class Board
       numbers << split_coordinate.last
     end
 
-   if letters.all? { |letter| letter == letters[0] }
+   if letters.all? { |letter| letter == letters[0] } # numbers.all? { |number| number != 1 or 4}
      true
   elsif numbers.all? { |number| number == numbers[0] }
      true
