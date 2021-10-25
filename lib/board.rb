@@ -29,17 +29,20 @@ class Board
     numbers = []
     coordinates.each do |coordinate|
       split_coordinate = coordinate.split('')
-      # require "pry"; binding.pry
       letters << split_coordinate.first
       numbers << split_coordinate.last
     end
-    # require "pry"; binding.pry
-   if letters.all? { |letter| letter == letters[0] } && numbers.all? { |number| number != 1 or 4}
-     true
-  elsif numbers.all? { |number| number == numbers[0] } && letters.all? { |letter| letter != "A" or "D"}
-     true
+
+  if letters.include("A") && letters.include?("D")
+    false
+  elsif numbers.include?("1") && numbers.include?("4")
+    false
+  elsif letters.all? { |letter| letter == letters[0] } 
+    true
+  elsif numbers.all? { |number| number == numbers[0] } 
+    true
    else
-     false
+    false
    end
   end
 
