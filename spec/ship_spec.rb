@@ -11,7 +11,6 @@ RSpec.describe Ship do
 
     expect(@cruiser).to be_an_instance_of(Ship)
     expect(@cruiser.name).to eq("Cruiser")
-
   end
 
   it "has health equal to its length" do
@@ -36,7 +35,6 @@ RSpec.describe Ship do
     @cruiser.hit
     expect(@cruiser.sunk?).to be(true)
     expect(@cruiser.health).to eq(0)
-
   end
 
   it "sinks when health equals 0" do

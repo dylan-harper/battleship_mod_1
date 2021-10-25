@@ -33,10 +33,10 @@ class Board
       letters << split_coordinate.first
       numbers << split_coordinate.last
     end
-
-   if letters.all? { |letter| letter == letters[0] }
+    # require "pry"; binding.pry
+   if letters.all? { |letter| letter == letters[0] } && numbers.all? { |number| number != 1 or 4}
      true
-  elsif numbers.all? { |number| number == numbers[0] }
+  elsif numbers.all? { |number| number == numbers[0] } && letters.all? { |letter| letter != "A" or "D"}
      true
    else
      false
