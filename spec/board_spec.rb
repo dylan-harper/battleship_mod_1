@@ -39,7 +39,7 @@ RSpec.describe Board do
     expect(@board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
     expect(@board.valid_placement?(cruiser, ["B1", "B2"])).to be(false)
     # require "pry"; binding.pry
-    # expect(@board.valid_placement?(submarine1, ["C1", "C2"])).to be(true)
+    expect(@board.valid_placement?(submarine1, ["C1", "C2"])).to be(true) #place in different test
     # expect(@board.valid_placement?(cruiser1, ["D1", "D2", "D3"])).to be(true)
   end
 
@@ -87,8 +87,8 @@ RSpec.describe Board do
   end
 
  it 'renders the board' do
-   
-  expect(@board.render).to eq('  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n')
+
+  expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
  end
 
 end
