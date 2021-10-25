@@ -5,6 +5,7 @@ require './lib/cell'
 RSpec.describe Cell do
   before(:each) do
     @cell = Cell.new("B4")
+    @cruiser = Ship.new("Cruiser", 3)
   end
 
   it 'exists' do
@@ -21,10 +22,6 @@ RSpec.describe Cell do
 
   it 'is cell empty' do
     expect(@cell.empty?).to be(true)
-  end
-
-  before(:each) do
-    @cruiser = Ship.new("Cruiser", 3)
   end
 
   it 'is a ship' do
@@ -76,7 +73,7 @@ RSpec.describe Cell do
     @cell.place_ship(@cruiser)
     3.times do @cell.fire_upon
     end
-    
+
     expect(@cell.render).to eq ("X")
   end
 
