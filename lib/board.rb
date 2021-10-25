@@ -55,11 +55,7 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
-    if ship.length == coordinates.count && consecutive_coordinates(coordinates) == true && overlapping_ships?(coordinates) == false
-      true
-    else
-      false
-    end
+    ship.length == coordinates.count && consecutive_coordinates(coordinates) && !overlapping_ships?(coordinates)
   end
 
 
@@ -70,19 +66,19 @@ class Board
   end
 
   def render
-    rendered_board = "  1 2 3 4 \\nA "
-    @board_cells.each_with_index { |kv, index|
-      rendered_board = rendered_board + kv[1].render + " "
+    rendered_board = "  1 2 3 4 \nA "
+    @board_cells.each_with_index do |(coordinate, cell), index|
+      rendered_board = rendered_board + cell.render + " "
       if index == 3
-        rendered_board = rendered_board + "\\nB "
+        rendered_board = rendered_board + "\nB "
       elsif index == 7
-        rendered_board = rendered_board + "\\nC "
+        rendered_board = rendered_board + "\nC "
       elsif index == 11
-        rendered_board = rendered_board + "\\nD "
+        rendered_board = rendered_board + "\nD "
       elsif index == 15
-        rendered_board = rendered_board + "\\n"
+        rendered_board = rendered_board + "\n"
       end
-    }
+    end
     rendered_board
   end
 end
