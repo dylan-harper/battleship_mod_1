@@ -11,7 +11,7 @@ class Board
   end
 
   def cells
-    if @board_cells.keys.length < 16
+    if @board_cells.keys.length == 0
       @coordinates.each do |coordinate|
         @board_cells[coordinate] = Cell.new(coordinate)
       end
@@ -67,8 +67,19 @@ class Board
       coordinates.each do |coordinate|
         @board_cells[coordinate].place_ship(ship)
       end
-
   end
 
-
+  def render
+    rendered_board = "1 2 3 4 \n"
+    @board_cells.each_with_index { |kv, index|
+      rendered_board = rendered_board + kv[1].render + " "
+      if index % 3 == 0
+        rendered_board = rendered_board + "\n"
+      end
+      elsif index == 0 #replaces an actual cell
+        rendered_board = rendered_board + " A"
+      end
+    }
+    rendered_board
+  end
 end

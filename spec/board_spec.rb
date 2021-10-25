@@ -87,8 +87,8 @@ RSpec.describe Board do
   end
 
  it 'renders the board' do
-
-
+   
+  expect(@board.render).to eq('  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n')
  end
 
 end
