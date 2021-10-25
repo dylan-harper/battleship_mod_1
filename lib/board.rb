@@ -70,14 +70,17 @@ class Board
   end
 
   def render
-    rendered_board = "1 2 3 4 \n"
+    rendered_board = "  1 2 3 4 \\nA "
     @board_cells.each_with_index { |kv, index|
       rendered_board = rendered_board + kv[1].render + " "
-      if index % 3 == 0
-        rendered_board = rendered_board + "\n"
-      end
-      elsif index == 0 #replaces an actual cell
-        rendered_board = rendered_board + " A"
+      if index == 3
+        rendered_board = rendered_board + "\\nB "
+      elsif index == 7
+        rendered_board = rendered_board + "\\nC "
+      elsif index == 11
+        rendered_board = rendered_board + "\\nD "
+      elsif index == 15
+        rendered_board = rendered_board + "\\n"
       end
     }
     rendered_board
