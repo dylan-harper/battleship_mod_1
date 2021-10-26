@@ -29,7 +29,6 @@ class Board
     numbers = []
     coordinates.each do |coordinate|
       split_coordinate = coordinate.split('')
-      # require "pry"; binding.pry
       letters << split_coordinate.first
       numbers << split_coordinate.last
     end
