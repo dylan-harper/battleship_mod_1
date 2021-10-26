@@ -48,7 +48,7 @@ RSpec.describe Board do
   it '#consecutive_coordinates ensures coordinates are consecutive' do
     cruiser_coordinates = ["A1", "A2", "A3"]
     submarine_coordinates = ["C2", "D3"]
-    require "pry"; binding.pry
+
     expect(@board.consecutive_coordinates(@submarine, ["A1", "A4"])).to be(false)
     # expect(@board.consecutive_coordinates(["A1", "D1"])).to be(false)
     expect(@board.consecutive_coordinates(@submarine, ["C2", "D2"])).to be(true)
@@ -86,6 +86,48 @@ RSpec.describe Board do
  it 'renders the board' do
 
   expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+ end
+
+ it 'renders board with hits, misses, sunken ships' do
+   cell_1 = @board.cells["A1"]
+   cell_2 = @board.cells["A2"]
+   cell_3 = @board.cells["A3"]
+   cell_4 = @board.cells["B4"]
+   cell_5 = @board.cells["C4"]
+   cell_6 = @board.cells["D4"]
+   @board.place(@cruiser, ["A1", "A2", "A3"])
+   @board.place(@submarine, ["B4", "C4"])
+   cell_1.fire_upon
+   cell_2.fire_upon
+   cell_4.fire_upon
+   cell_5.fire_upon
+   cell_6.fire_upon
+
+
+   expect(@board.render).to eq("  1 2 3 4 \nA H H . . \nB . . . X \nC . . . X \nD . . . M \n")
+ end
+
+ it 'renders the player ships' do
+   cell_1 = @board.cells["A1"]
+   cell_2 = @board.cells["A2"]
+   cell_3 = @board.cells["A3"]
+   @board.place(@cruiser, ["A1", "A2", "A3"])
+
+
+
+   expect(@board.render(s = true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+ end
+
+ it 'can render multiple player ships' do
+   cell_1 = @board.cells["A1"]
+   cell_2 = @board.cells["A2"]
+   cell_3 = @board.cells["A3"]
+   cell_4 = @board.cells["B4"]
+   cell_5 = @board.cells["C4"]
+   @board.place(@cruiser, ["A1", "A2", "A3"])
+   @board.place(@submarine, ["B4", "C4"])
+
+   expect(@board.render(s = true)).to eq("  1 2 3 4 \nA S S S . \nB . . . S \nC . . . S \nD . . . . \n")
  end
 
 end

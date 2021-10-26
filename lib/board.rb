@@ -77,21 +77,37 @@ class Board
   end
 
   def render(s = nil)
-    # if s = true
-
-
 
     rendered_board = "  1 2 3 4 \nA "
-    @board_cells.each_with_index do |(coordinate, cell), index|
-      rendered_board = rendered_board + cell.render + " "
-      if index == 3
+
+
+    if s == nil
+      @board_cells.each_with_index do |(coordinate, cell), index|
+        rendered_board = rendered_board + cell.render + " "
+        if index == 3
         rendered_board = rendered_board + "\nB "
-      elsif index == 7
+        elsif index == 7
         rendered_board = rendered_board + "\nC "
-      elsif index == 11
+        elsif index == 11
         rendered_board = rendered_board + "\nD "
-      elsif index == 15
+        elsif index == 15
         rendered_board = rendered_board + "\n"
+        end
+      end
+    end
+
+    if s == true
+      @board_cells.each_with_index do |(coordinate, cell), index|
+        rendered_board = rendered_board + cell.render(true) + " "
+        if index == 3
+          rendered_board = rendered_board + "\nB "
+        elsif index == 7
+          rendered_board = rendered_board + "\nC "
+        elsif index == 11
+          rendered_board = rendered_board + "\nD "
+        elsif index == 15
+          rendered_board = rendered_board + "\n"
+        end
       end
     end
 
