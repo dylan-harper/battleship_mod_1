@@ -49,11 +49,11 @@ RSpec.describe Board do
     cruiser_coordinates = ["A1", "A2", "A3"]
     submarine_coordinates = ["C2", "D3"]
 
-    expect(@board.consecutive_coordinates(["A1", "A4"])).to be(false)
+    expect(@board.consecutive_coordinates(@submarine, ["A1", "A4"])).to be(false)
     # expect(@board.consecutive_coordinates(["A1", "D1"])).to be(false)
-    expect(@board.consecutive_coordinates(["C2", "D2"])).to be(true)
-    expect(@board.consecutive_coordinates(cruiser_coordinates)).to be(true)
-    expect(@board.consecutive_coordinates(submarine_coordinates)).to be(false)
+    expect(@board.consecutive_coordinates(@submarine, ["C2", "D2"])).to be(true)
+    expect(@board.consecutive_coordinates(@cruiser, cruiser_coordinates)).to be(true)
+    expect(@board.consecutive_coordinates(@submarine, submarine_coordinates)).to be(false)
   end
 
   it '#place puts ship with associated cells' do
