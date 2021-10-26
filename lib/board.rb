@@ -21,7 +21,7 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @coordinates.include?(coordinate)
+    @coordinates.include?(coordinate) == true
   end
 
   def consecutive_coordinates(ship, coordinates)
@@ -66,6 +66,11 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
+
+    coordinates.each do |coordinate|
+      valid_coordinate?(coordinate)
+    end
+
     ship.length == coordinates.count && consecutive_coordinates(ship, coordinates) && !overlapping_ships?(coordinates)
   end
 
