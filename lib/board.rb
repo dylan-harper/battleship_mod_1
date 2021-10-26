@@ -24,7 +24,7 @@ class Board
     @coordinates.include?(coordinate)
   end
 
-  def consecutive_coordinates(coordinates)
+  def consecutive_coordinates(ship, coordinates)
     letters = []
     numbers = []
     coordinates.each do |coordinate|
@@ -33,15 +33,19 @@ class Board
       numbers << split_coordinate.last
     end
 
-  if letters.include("A") && letters.include?("D")
+  if letters.include?("A") && letters.include?("D")
     false
   elsif numbers.include?("1") && numbers.include?("4")
     false
+  elsif ship.length == 2 && numbers.include?("1") && numbers.include?("3")
+    false
+  elsif ship.length == 2 && numbers.include?("2") && numbers.include?("4")
+    false
   elsif letters.all? { |letter| letter == letters[0] } 
     true
-  elsif numbers.all? { |number| number == numbers[0] } 
+  elsif numbers.all? { |number| number == numbers[0] }
     true
-   else
+  else
     false
    end
   end
@@ -58,7 +62,7 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.count && consecutive_coordinates(coordinates) && !overlapping_ships?(coordinates)
+    ship.length == coordinates.count && consecutive_coordinates(ship, coordinates) && !overlapping_ships?(coordinates)
   end
 
 
@@ -68,7 +72,11 @@ class Board
       end
   end
 
-  def render
+  def render(s = nil)
+    # if s = true
+
+
+
     rendered_board = "  1 2 3 4 \nA "
     @board_cells.each_with_index do |(coordinate, cell), index|
       rendered_board = rendered_board + cell.render + " "
@@ -82,6 +90,8 @@ class Board
         rendered_board = rendered_board + "\n"
       end
     end
+
     rendered_board
+
   end
 end
