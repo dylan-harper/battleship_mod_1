@@ -48,7 +48,7 @@ RSpec.describe Board do
   it '#consecutive_coordinates ensures coordinates are consecutive' do
     cruiser_coordinates = ["A1", "A2", "A3"]
     submarine_coordinates = ["C2", "D3"]
-
+    require "pry"; binding.pry
     expect(@board.consecutive_coordinates(@submarine, ["A1", "A4"])).to be(false)
     # expect(@board.consecutive_coordinates(["A1", "D1"])).to be(false)
     expect(@board.consecutive_coordinates(@submarine, ["C2", "D2"])).to be(true)
