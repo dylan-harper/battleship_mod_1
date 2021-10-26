@@ -33,21 +33,25 @@ class Board
       numbers << split_coordinate.last
     end
 
-  if letters.include?("A") && letters.include?("D")
-    false
-  elsif numbers.include?("1") && numbers.include?("4")
-    false
-  elsif ship.length == 2 && numbers.include?("1") && numbers.include?("3")
-    false
-  elsif ship.length == 2 && numbers.include?("2") && numbers.include?("4")
-    false
-  elsif letters.all? { |letter| letter == letters[0] } 
-    true
-  elsif numbers.all? { |number| number == numbers[0] }
-    true
-  else
-    false
-   end
+    if letters.include?("A") && letters.include?("D")
+      false
+    elsif numbers.include?("1") && numbers.include?("4")
+      false
+    elsif ship.length == 2 && numbers.include?("1") && numbers.include?("3")
+      false
+    elsif ship.length == 2 && numbers.include?("2") && numbers.include?("4")
+      false
+    elsif ship.length == 2 && letters.include?("A") && letters.include?("C")
+      false
+    elsif ship.length == 2 && letters.include?("B") && letters.include?("D")
+      false
+    elsif letters.all? { |letter| letter == letters[0] }
+      true
+    elsif numbers.all? { |number| number == numbers[0] }
+      true
+    else
+      false
+     end
   end
 
   def overlapping_ships?(coordinates)
