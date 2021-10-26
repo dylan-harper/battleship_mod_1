@@ -21,7 +21,7 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @coordinates.include?(coordinate) == true
+    @coordinates.include?(coordinate)
   end
 
   def consecutive_coordinates(ship, coordinates)
