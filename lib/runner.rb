@@ -91,6 +91,37 @@ def player_board
 
 end
 
+def turn
+  puts "It is your turn. Which cell would you like to fire upon? :"
+  choice = gets.chomp
+  choice = choice.to_s
+
+  if @c_board.cells[choice].ship != nil
+   @c_board.cells[choice].fire_upon
+   puts "Succesful hit!"
+  elsif @c_board.cells[choice].ship == nil
+   puts "Miss"
+  end
+
+  puts @c_board.render
+  puts @board.render(s = true)
+end
+
+def computer_turn
+  puts "Now it's the computer's turn: "
+  random = @board.coordinates.sample(1)
+  random = random
+  random = random[0]
+  if @board.cells[random].ship != nil
+     @board.cells[random].fire_upon
+     puts "Succesful hit by the computer!"
+  elsif @board.cells[random].ship == nil
+     puts "The computer missed"
+  end
+  puts @c_board.render
+  puts @board.render(s = true)
+end
+
 
 
 def game_initiate
@@ -103,10 +134,20 @@ def game_initiate
   player_board
 
 
+  puts "****************************"
+  puts "This is the complete board: "
+  puts "****************************"
+  puts @c_board.render
+  puts @board.render(s = true)
 
-  end
+  turn
+  computer_turn
+  turn
+  computer_turn
+  turn
+  computer_turn
 
-
+end
 
 
 user_input = gets.chomp
