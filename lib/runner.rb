@@ -45,18 +45,45 @@ def game_initiate
   cruiser_coords << gets.chomp
   cruiser_coords = cruiser_coords[0].split
 
-  if @board.valid_placement?(player_cruiser, cruiser_coords)
+  if @board.valid_placement?(player_cruiser, cruiser_coords) == true
     @board.place(player_cruiser, cruiser_coords)
-    puts "Your have placed your cruiser on " + cruiser_coords
-  elsif @board.valid_placement?(player_cruiser, cruiser_coords) == false
+    puts "Your have placed your cruiser on #{cruiser_coords}"
+  elsif !@board.valid_placement?(player_cruiser, cruiser_coords)
     while !@board.valid_placement?(player_cruiser, cruiser_coords) do
       puts "Either those coordinates are taken or they are invalid. Try again:"
-      cruiser_coords = gets.chomp
+      cruiser_coords = []
+      cruiser_coords << gets.chomp
       cruiser_coords = cruiser_coords[0].split
     end
-    @board.place(player_cruiser, cruiser_coords)
+    puts "Those are valid coordinates. You have placed your cruiser on #{cruiser_coords}"
   end
+  @board.place(player_cruiser, cruiser_coords)
+  puts @board.render(s = true)
+
+  puts "Enter the squares for the Submarine (2 spaces):"
+
+  sub_coords << gets.chomp
+  sub_coords = sub_coords[0].split
+
+  if @board.valid_placement?(player_sub, sub_coords) == true
+    @board.place(player_sub, sub_coords)
+    puts "Your have placed your cruiser on #{sub_coords}"
+  elsif !@board.valid_placement?(player_sub, sub_coords)
+    while !@board.valid_placement?(player_sub, sub_coords) do
+      puts "Either those coordinates are taken or they are invalid. Try again:"
+      sub_coords = []
+      sub_coords << gets.chomp
+      sub_coords = sub_coords[0].split
+    end
+    puts "Those are valid coordinates. You have placed your cruiser on #{sub_coords}"
+  end
+  @board.place(player_sub, sub_coords)
+  puts @board.render(s = true)
+  
+
+
 end
+
 
 
 
