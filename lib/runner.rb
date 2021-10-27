@@ -6,34 +6,42 @@ puts "Welcome to BATTLESHIP"
 puts "Enter p to play. Enter q to quit"
 
 
-def game_initiate
-  @board = Board.new
-  @board.cells
+
+
+
+def computer_board
+  @c_board = Board.new
+  @c_board.cells
 
   computer_cruiser = Ship.new("Cruiser", 3)
   computer_sub = Ship.new("Submarine", 2)
 
-  computer_cruiser_coords = @board.coordinates.sample(3)
-  computer_sub_coords = @board.coordinates.sample(2)
+  computer_cruiser_coords = @c_board.coordinates.sample(3)
+  computer_sub_coords = @c_board.coordinates.sample(2)
 
-  if @board.valid_placement?(computer_cruiser, computer_cruiser_coords) == false
-    while @board.valid_placement?(computer_cruiser, computer_cruiser_coords) == false do
-      computer_cruiser_coords = @board.coordinates.sample(3)
+  if @c_board.valid_placement?(computer_cruiser, computer_cruiser_coords) == false
+    while @c_board.valid_placement?(computer_cruiser, computer_cruiser_coords) == false do
+      computer_cruiser_coords = @c_board.coordinates.sample(3)
     end
   else
   end
 
-  if @board.valid_placement?(computer_sub, computer_sub_coords) == false
-    while @board.valid_placement?(computer_sub, computer_sub_coords) == false do
-      computer_sub_coords = @board.coordinates.sample(2)
+  if @c_board.valid_placement?(computer_sub, computer_sub_coords) == false
+    while @c_board.valid_placement?(computer_sub, computer_sub_coords) == false do
+      computer_sub_coords = @c_board.coordinates.sample(2)
     end
   else
   end
 
-  @board.place(computer_cruiser, computer_cruiser_coords)
-  @board.place(computer_sub, computer_sub_coords)
-  puts "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long."
-  puts @board.render
+  @c_board.place(computer_cruiser, computer_cruiser_coords)
+  @c_board.place(computer_sub, computer_sub_coords)
+
+
+end
+
+def player_board
+  @board = Board.new
+  @board.cells
 
   player_cruiser = Ship.new("Cruiser", 3)
   player_sub = Ship.new("Submarine", 2)
@@ -58,6 +66,7 @@ def game_initiate
     puts "Those are valid coordinates. You have placed your cruiser on #{cruiser_coords}"
   end
   @board.place(player_cruiser, cruiser_coords)
+  # puts @board.render
   puts @board.render(s = true)
 
   puts "Enter the squares for the Submarine (2 spaces):"
@@ -79,10 +88,23 @@ def game_initiate
   end
   @board.place(player_sub, sub_coords)
   puts @board.render(s = true)
-  
-
 
 end
+
+
+
+def game_initiate
+
+  computer_board
+
+  puts "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long."
+  puts @c_board.render
+
+  player_board
+
+
+
+  end
 
 
 
